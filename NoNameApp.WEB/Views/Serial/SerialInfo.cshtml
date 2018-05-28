@@ -1,0 +1,140 @@
+﻿@model NoNameApp.Entities.Serial
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_LayoutWithMenu.cshtml";
+    string rate="-";
+    if (Model.Ratings.Select(r => r).ToList().Count() != 0)
+    {
+        rate = Model.Ratings.Select(rat => rat.ValueRating).Average().ToString("f2");
+    }
+} 
+   
+   <div class="serial">
+       @if (User.IsInRole("admin"))
+       {
+           if (ViewBag.StatusMessage != "")
+           {
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                @ViewBag.StatusMessage
+            </div>
+           }
+       }
+    <div id="modDialog" class="modal fade">
+           <div id="dialogContent" class="modal-dialog"></div>
+    </div>
+    <div class="content info">
+        @Html.Partial("_DelSerialPartial")
+        <div class="row bottom-padding"> 
+            <img class="col-md-7  info-image" src="@Model.Picture" alt="pic" height="300" width="500">
+            <div class="col-md-4  info-text">
+                @Html.Partial("_InfoForAorU")
+                <p>@Html.LabelFor(model => Model.Ratings) @rate из 5 </p>
+            </div>
+        </div>
+    </div>
+    <div class="row content watch-button">
+           <div class="col-md-3 watch-button">
+                   <ul class="pagination">
+                       <li>@Html.ActionLink("Смотрю", "Watch", new { id = Model.Id}, new {@id="active" })</li>
+                       <li>@Html.ActionLink("Не смотрю", "UnWatch", new { id = Model.Id }, new { @id = "off" })</li>
+                   </ul>
+            </div>
+    </div>
+    <div class="row content rate">
+        <div class=" rate-inner">
+            <h4>Моя оценка</h4>
+            <form id="rateForm">
+                <span class="btn-rate" id="rate1" onclick="goodClick($(this), id)">★</span>
+                <span class="btn-rate" id="rate2" onclick="goodClick($(this), id)">★</span>
+                <span class="btn-rate" id="rate3" onclick="goodClick($(this), id)">★</span>
+                <span class="btn-rate" id="rate4" onclick="goodClick($(this), id)">★</span>
+                <span class="btn-rate" id="rate5" onclick="goodClick($(this), id)">★</span>
+                <div id="result"></div>
+            </form>
+        </div>
+    </div>
+    <div class="row content description">
+        <h4 class="">@Html.LabelFor(model => Model.Description)</h4>
+        <div class="row">
+            <div class="col-md-8 gk">
+                 @Html.Partial("_ChangeDescription")
+            </div>
+        </div>
+    </div>
+    
+    <div class="row content check">
+        <div class="check-inner">
+          
+            @if(User.IsInRole("admin"))
+            {
+                @Html.Partial("_AdminPanel",@Model)
+            }
+            else
+            {
+                <h4 class="check-inner-title">Мои отметки</h4>
+                @Html.Partial("_UserPanel",@Model)
+            }
+            @Html.Partial("_AddSeason", @Model)
+        </div>
+    </div>
+       
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+           var buttonArr = document.getElementsByClassName('btn-rate');
+           
+           for (var i = 0; i < @ViewBag.staredItems; i++) {
+               buttonArr[i].classList.add('clicked');
+           }
+
+           function goodClick(btn, id) {
+               const buttonArr = document.getElementsByClassName('btn-rate');
+
+               for (var i = 0; i <= buttonArr.length; i++) {
+                   if ($(buttonArr[i]).hasClass('clicked')) {
+                       $(buttonArr[i]).removeClass('clicked');
+                   }
+               }
+
+               var starCount = +id.split('').slice(4);
+               for (var i = starCount; i >= 1; i--) {
+                   $('#rate' + i).addClass('clicked');
+               }
+
+               var serialId = encodeURIComponent(@Model.Id);
+               starCount = encodeURIComponent(starCount);
+               $('#result').load('@Url.Action("AjaxStar", "Serial")?starCount=' + starCount, 'id=' +serialId);
+           }
+
+           function statusButton() {
+               var watched= "@ViewBag.Watched";
+               var buttonOn = $("#active");
+               var buttonOff = $("#off");
+               if (watched === "True") {
+                   buttonOn.css({ "background-color": "rgba(255,0,0,0.5)", "color": "white" }); 
+               }
+               else {
+                   buttonOff.css({ "background-color": "rgba(255,0,0,0.5)", "color": "white" }); 
+               }
+           }
+           statusButton();
+           
+
+           $(function () {
+               $.ajaxSetup({ cache: false });
+               $(".confirmModal").click(function (e) {
+
+                   e.preventDefault();
+                   $.get(this.href, function (data) {
+                       $('#dialogContent').html(data);
+                       $('#modDialog').modal('show');
+                   });
+               });
+           })
+    </script>
+}

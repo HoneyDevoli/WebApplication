@@ -1,0 +1,20 @@
+﻿@model NoNameApp.Entities.Serial
+@if (User.IsInRole("admin"))
+{
+    using (Html.BeginForm("ChangeName", "Serial"))
+    {
+        @Html.HiddenFor(s => s.Id)
+        @Html.EditorFor(s => s.Name, new { htmlAttributes = new { placeholder = "Новое название сериала" } })
+        <input type="submit" name="submit" value="Изменить название" class="btn btn-default"/>
+        <button class="btn btn-default">
+        @Html.ActionLink("Удалить Сериал", "ConfirmDelSerial",
+                                    new { id = Model.Id },
+                                    new { @class = "confirmModal" })
+        </button>
+    }
+    
+}
+else
+{
+    <h3 class="info-title">@Html.DisplayFor(model => Model.Name) </h3>
+}

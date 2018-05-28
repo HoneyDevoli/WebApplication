@@ -1,0 +1,13 @@
+﻿@model NoNameApp.Entities.Season
+@if (User.IsInRole("admin"))
+{
+    using (Html.BeginForm("AddEpisode", "Serial"))
+    {
+        <input type="hidden" name="id" value="@Model.Id" />
+        <input type="hidden" name="count" value="@Model.Episodes.Count()" />
+        @Html.HiddenFor(s=>s.SerialId)
+        @Html.Editor("name", new { htmlAttributes = new { placeholder = "Название серии" } })
+        <input id="date" type="date" name="date"  />
+        <input type="submit" name="submit" value="Добавить эпизод" class="btn btn-default" />
+    }
+}

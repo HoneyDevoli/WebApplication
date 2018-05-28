@@ -1,0 +1,67 @@
+﻿@model NoNameApp.Entities.Serial
+@{ var rate = 0;
+    if (Model.Ratings.Select(r => r).ToList().Count() != 0)
+    {
+        rate =(int)Model.Ratings.Select(rat => rat.ValueRating).Average();
+    }
+}
+@if (rate == 0)
+{
+    <form id="rateForm">
+        <span class="btn-rate sizezv" id="rate1" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate2" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate3" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate4" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate5" onclick="goodClick($(this), id)">&#9733;</span>
+    </form>
+}
+@if (rate > 0 && rate <= 1)
+{
+    <form id="rateForm">
+        <span class="btn-rate sizezv clicked" id="rate1" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate2" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate3" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate4" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate5" onclick="goodClick($(this), id)">&#9733;</span>
+    </form>
+}
+@if (rate > 1 && rate <= 2)
+{
+    <form id="rateForm">
+        <span class="btn-rate sizezv clicked" id="rate1" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate2" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate3" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate4" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate5" onclick="goodClick($(this), id)">&#9733;</span>
+    </form>
+}
+@if (rate > 2 && rate <= 3)
+{
+    <form id="rateForm">
+        <span class="btn-rate sizezv clicked" id="rate1" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate2" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate3" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate4" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate5" onclick="goodClick($(this), id)">&#9733;</span>
+    </form>
+}
+@if (rate > 3 && rate <= 4)
+{
+    <form id="rateForm">
+        <span class="btn-rate sizezv clicked" id="rate1" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate2" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate3" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate4" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv" id="rate5" onclick="goodClick($(this), id)">&#9733;</span>
+    </form>
+}
+@if (rate > 4 && rate <= 5)
+{
+    <form id="rateForm">
+        <span class="btn-rate sizezv clicked" id="rate1" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate2" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate3" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate4" onclick="goodClick($(this), id)">&#9733;</span>
+        <span class="btn-rate sizezv clicked" id="rate5" onclick="goodClick($(this), id)">&#9733;</span>
+    </form>
+}

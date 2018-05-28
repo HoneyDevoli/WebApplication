@@ -1,0 +1,39 @@
+﻿@model List<NoNameApp.Entities.Serial>
+@{
+    ViewBag.Title = "Поиск";
+}
+
+<div class="content info kekn">
+    <h2>Результаты поиска</h2>
+    @if (Model == null)
+    {
+    <h3>@ViewBag.StatusMessage</h3>
+    }
+    else
+    {
+    <table class="table">
+        <tr>
+            <th>Название</th>
+            <th>Рейтинг</th>
+            <th>Сезонов</th>
+            <th>Год</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="bloc1"> @Html.ActionLink(item.Name, "SerialInfo", new { id = item.Id }) </td>
+                <td class="bloc2">
+                    @Html.Partial("_RatingPartial", item)
+                </td>
+                <td class="bloc3">@Html.DisplayFor(model => item.Seasons.Count)</td>
+                <td class="bloc3">@Html.DisplayFor(model => item.Begin.Year)</td>
+            </tr>
+      }
+    </table>
+    }
+    <br />
+
+</div>
+
+
+

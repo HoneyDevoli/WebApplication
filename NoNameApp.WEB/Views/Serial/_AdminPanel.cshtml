@@ -1,0 +1,24 @@
+﻿@model NoNameApp.Entities.Serial
+    @foreach (var season in Model.Seasons)
+    {
+        <div class="col-md-12 season">
+            <div class="col-md-2 ">
+                @Html.Partial("_ChangeSeason", season)
+            </div>
+            @Html.Partial("_AddEpisode", season)
+            <div class="col-md-9 ">
+                <ul class="episode-list spis">
+                    @foreach (var episode in season.Episodes)
+                    {
+                        <li>
+                            @Html.Partial("_ChangeEpisode", episode)
+                        </li>
+                    }
+                </ul>
+                <hr />
+            </div>
+        </div>
+        
+    }
+ 
+

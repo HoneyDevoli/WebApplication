@@ -1,0 +1,18 @@
+﻿@if (Request.IsAuthenticated)
+{
+        <ul class="nav navbar-nav col-md-offset-1">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Настройки", "Edit", "Account")</li>
+                    <li role="separator" class="divider"></li>
+                    <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
+                </ul>
+            </li>
+        </ul>
+}
+else
+{
+        <button type="button" class="btn btn-default navbar-btn">@Html.ActionLink("Войти", "Login", "Account", null, new { style = "color:#333" })  </button>
+}
+

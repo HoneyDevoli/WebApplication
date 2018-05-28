@@ -1,0 +1,24 @@
+﻿@model NoNameApp.Entities.Episode
+
+
+@using (Html.BeginForm("ChangeEpisode", "Serial"))
+{
+    @Model.Date.ToString("dd.MM.yy")
+    @Html.LabelFor(modelep => Model.NumberOfEpisode)
+    <input type="hidden" name="idEp" value="@Model.Id" />
+    @Html.EditorFor(e => e.NumberOfEpisode, new { htmlAttributes = new { placeholder = "Новый номер серии" } })
+    @Html.EditorFor(e => e.Name, new { htmlAttributes = new { placeholder = "Новое название серии" } })
+    @Html.ActionLink("Видео", "WatchingEpisode", new { id = Model.Id })
+    @Html.HiddenFor(e=> e.Id)
+    <input type="submit" name="Change" value="Изменить" class="btn btn-default" />
+    <button class="btn btn-default">
+        @Html.ActionLink("Удалить", "ConfirmDelEpisode",
+                                new { idEp = Model.Id, idSer = Model.Season.SerialId },
+                                new { @class = "confirmModal" })
+    </button>
+}
+
+
+    
+
+

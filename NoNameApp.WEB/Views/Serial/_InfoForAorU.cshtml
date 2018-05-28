@@ -1,0 +1,33 @@
+﻿@model NoNameApp.Entities.Serial
+@if (User.IsInRole("admin"))
+{
+    using (Html.BeginForm("ChangeInfoSer", "Serial"))
+    {
+        @Html.HiddenFor(s=>s.Id)
+        @Html.Label("Ссылка на картинку")
+        @Html.EditorFor(s=>s.Picture, new { htmlAttributes = new { placeholder = "Ссылка на картинку" } })
+        @Html.LabelFor(model => Model.Begin)
+        <input id="begin" type="date" name="begin" />
+        <p id="pCounty">@Html.LabelFor(model => Model.Country)</p>
+        @Html.EditorFor(s => s.Country, new { htmlAttributes = new { placeholder = "Новая страна" } })
+        <span>@Html.LabelFor(model => Model.Duration) &#13 &#13 &#13 &#13 &#13 &#13 &#13 &#13 &#13 &#13 &#13 &#13 &#13 &#13 &#13
+        @Html.EditorFor(s=>s.Duration, new { htmlAttributes = new { placeholder = "Новая длительность серии" } })
+        Мин. </span>
+        if (Model.Status)
+        { <p id="pCounty"> @Html.LabelFor(model => Model.Status) Идет &#13  @Html.EditorFor(s=>s.Status)</p>}
+        else
+        {<p id="pCounty"> @Html.LabelFor(model => Model.Status) Закончился &#13  @Html.EditorFor(s => s.Status)</p>}
+        
+        <input type="submit" name="submit" value="Изменить" class="btn btn-default" />
+    }
+}
+else
+{
+    <p>@Html.LabelFor(model => Model.Begin) @Html.DisplayFor(model => Model.Begin.Year)</p>
+    <p>@Html.LabelFor(model => Model.Country) @Html.DisplayFor(model => Model.Country) </p>
+    <p>@Html.LabelFor(model => Model.Duration) @Html.DisplayFor(model => Model.Duration) Мин </p>
+    if (Model.Status)
+    { <p> @Html.LabelFor(model => Model.Status) Идет</p>}
+    else
+    {<p> @Html.LabelFor(model => Model.Status) Закончился</p>}
+}

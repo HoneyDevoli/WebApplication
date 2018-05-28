@@ -1,0 +1,58 @@
+﻿@using NoNameApp.Entities
+@using NoNameApp.WEB.Models;
+@model List<Serial>
+@using NoNameApp.WEB.Helpers
+@{var watched = ViewBag.Watched as List<WatchedViewModel>; }
+
+
+
+<div class="content info">
+    <h2>Моя статистика</h2>
+    <div class="info-box-row">
+        <div class="info-box info-box-green">@ListHelpers.PluralizeRus(ViewBag.AmountEp, "Эпизод", "Эпизода", "Эпизодов")</div>
+        <div class="info-box info-box-red">@ListHelpers.PluralizeRus(ViewBag.SpentHours, "Час", "Часа", "Часов")</div>
+        <div class="info-box info-box-blue">@ListHelpers.PluralizeRus(ViewBag.SpentDays, "День", "Дня", "Дней")</div>
+    </div>
+
+@if (Model.Count != 0)
+{
+    <h2>Смотрю</h2>
+    <table class="table">
+        <tr>
+            <th>Название</th>
+            <th>Моя оценка</th>
+            <th>Посмотренно эпизодов</th>
+        </tr>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td class="bloc1"> @Html.ActionLink(Model[i].Name, "SerialInfo", "Serial", new { id = Model[i].Id }, null) </td>
+                <td class="bloc2">
+                   @Html.Partial("_UserRatePartial", watched[i])
+                </td>
+                @{  var status = 0;
+                    if (watched[i].CountEp != 0)
+                    {
+                        status = watched[i].CountEp * 100 / Model[i].Seasons.SelectMany(s => s.Episodes).ToList().Count;
+                    }
+                }
+                <td class="bloc3">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow=@watched[i].CountEp.ToString() aria-valuemin="0" aria-valuemax=100 style="width:@status%">
+                            @watched[i].CountEp/@Model[i].Seasons.SelectMany(s => s.Episodes).ToList().Count
+                        </div>
+                     </div>
+                </td>
+            </tr>
+                    }
+
+    </table>
+    <br />
+                    }
+else
+{
+    <h2>
+       Ты еще не добавил в свою коллекцию никаких сериалов, @Html.ActionLink("здесь", "Index", "Serial") ты можешь выбрать что-то
+    </h2>
+}
+</div>

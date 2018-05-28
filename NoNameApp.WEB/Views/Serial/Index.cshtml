@@ -1,0 +1,47 @@
+﻿@model PagedList.IPagedList<NoNameApp.Entities.Serial>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    Layout = "~/Views/Shared/_LayoutWithMenu.cshtml";
+    ViewBag.Title = "Все сериалы ";
+}
+
+    <div class="content info">
+        @if (User.IsInRole("admin"))
+        {
+            if (ViewBag.StatusMessage != "")
+            {
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    @ViewBag.StatusMessage
+                </div>
+            }
+        }
+        <h2>Каталог сериалов</h2>
+        <table class="table">
+            <tr>
+                <th>Название</th>
+                <th>Рейтинг</th>
+                <th>Сезонов</th>
+                <th>Год</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="bloc1"> @Html.ActionLink(item.Name, "SerialInfo", new { id=item.Id }) </td>
+                    <td class="bloc2">
+                            @Html.Partial("_RatingPartial",item )
+                    </td >
+                    <td class="bloc3">@Html.DisplayFor(model => item.Seasons.Count)</td>
+                    <td class="bloc3">@Html.DisplayFor(model => item.Begin.Year)</td>
+                </tr>
+            }
+        </table>
+        @if (User.IsInRole("admin"))
+        {
+            <button class="btn btn-default">@Html.ActionLink("Добавить сериал", "ToAdding")</button>
+        }
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        <p class="all">Всего в базе сериалов @ViewBag.Count</p>
+        </div>

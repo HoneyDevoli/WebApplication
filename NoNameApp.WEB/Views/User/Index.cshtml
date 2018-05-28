@@ -1,0 +1,65 @@
+﻿@model List<IGrouping<NoNameApp.Entities.Serial,IGrouping<NoNameApp.Entities.Season, NoNameApp.Entities.Episode>>>
+@{
+     
+     ViewBag.Title = "Мои сериалы";
+}
+    @if (Model.Count != 0)
+    {
+        <h2>Непросмотренные серии</h2>
+        <div class="panel-group" aria-multiselectable="true">
+        <div class="panel panel-default">
+            @foreach (var serialGroup in Model)
+            {
+                <p class="panel-heading">@Html.ActionLink(serialGroup.Key.Name, "SerialInfo", "Serial", new { id = serialGroup.Key.Id }, null)</p>
+                foreach (var seasonGroup in serialGroup)
+                {
+                    <div> 
+                        <h4 class="panel-title">
+                            <a class="collapse-btn" onclick="collapseList($('#@seasonGroup.Key.Id'))">
+                                @seasonGroup.Key.NumberOfSeasons
+                                @Html.LabelFor(m => seasonGroup.Key.NumberOfSeasons)
+                                <span class="glyphicon glyphicon-menu-down"></span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="@seasonGroup.Key.Id">
+                        @foreach (var episode in seasonGroup)
+                        {
+                            <ul class="list-group">
+                                <table class="list-group-item">
+                                    <tr>
+                                        <td class="list-group-item-serial">
+                                            @Html.LabelFor(m => episode.NumberOfEpisode)
+                                            @Html.DisplayFor(m => episode.NumberOfEpisode)
+                                        </td>
+                                        <td class="list-group-item-serial">@Html.DisplayFor(m => episode.Name)</td>
+                                        <td class="list-group-item-serial">@episode.Date.ToString("dd.MM.yy")</td>
+                                    </tr>    
+                                </table>
+                            </ul> 
+                         }
+                    </div>
+                }
+             }
+         </div>
+    </div>
+    }
+else
+{
+    <h2>
+   Непросмотренных серий нет, возможно стоит выбрать что-то @Html.ActionLink("новое", "Index", "Serial")
+        на просмотр
+    </h2>
+ }
+@section scripts
+{
+    <script type="text/javascript">
+        function collapseList(list) {
+            if (list.hasClass('collapse') && list.hasClass('in')) {
+                list.removeClass('in');
+            } else {
+                list.addClass('in');
+            }
+        }
+    </script>
+}

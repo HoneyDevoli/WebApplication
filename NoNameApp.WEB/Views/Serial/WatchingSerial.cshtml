@@ -1,0 +1,45 @@
+﻿@{
+    @model NoNameApp.Entities.Episode
+    ViewBag.Title = "Смотреть сериал";
+    Layout = "~/Views/Shared/_LayoutWithMenu.cshtml";
+}
+
+<div class="serial">
+    
+    @if (User.IsInRole("admin"))
+    {
+        using (Html.BeginForm("WatchingEpisode", "Serial"))
+        {
+         <h5>Ссылка на видео</h5>
+        @Html.EditorFor(s => s.Video, new { htmlAttributes = new { placeholder = "Новая ссылка на серию" } })
+       
+        @Html.HiddenFor(s => s.Id)
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="submit" name="submit" value="Изменить" class="btn btn-default" />
+        }
+        @Html.ActionLink("Назад", "SerialInfo",new {id = Model.Season.SerialId})
+    }
+    else
+    {
+        <h3 style="color:red">Купите вип-аккаунт для просмотра сериалов онлайн</h3>
+    }
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        
+
+           $(function () {
+               $.ajaxSetup({ cache: false });
+               $(".confirmModal").click(function (e) {
+
+                   e.preventDefault();
+                   $.get(this.href, function (data) {
+                       $('#dialogContent').html(data);
+                       $('#modDialog').modal('show');
+                   });
+               });
+           })
+    </script>
+}

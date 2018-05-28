@@ -1,0 +1,59 @@
+﻿@{
+    @model NoNameApp.Entities.Serial
+    ViewBag.Title = "Добавить сериал";
+    Layout = "~/Views/Shared/_LayoutWithMenu.cshtml";
+}
+
+<h2>Добавление сериала</h2>
+@using (Html.BeginForm("ToAdding", "Serial"))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <ol>
+            <li class="change-password">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </li>
+            <li class="change-password">
+                @Html.LabelFor(m => m.Begin)
+                <input id="begin" type="date" name="begin" />
+                @Html.ValidationMessageFor(m => m.Begin)
+            </li>
+            <li class="change-password">
+                @Html.LabelFor(m => m.Picture)
+                @Html.TextBoxFor(m => m.Picture)
+                @Html.ValidationMessageFor(m => m.Picture)
+            </li>
+            <li class="change-password">
+                @Html.LabelFor(m => m.Country)
+                @Html.TextBoxFor(m => m.Country)
+                @Html.ValidationMessageFor(m => m.Country)
+            </li>
+            <li class="change-password">
+                @Html.LabelFor(m => m.Description)
+                @Html.TextAreaFor(m => m.Description, new { htmlAttributes = new { rows = "5" } })
+                @Html.ValidationMessageFor(m => m.Description)
+            </li>
+            <li class="change-password">
+                @Html.LabelFor(m => m.Duration)
+                @Html.TextBoxFor(m => m.Duration)
+                @Html.ValidationMessageFor(m => m.Duration)
+            </li>
+            <li class="change-password">
+                @Html.LabelFor(m => m.Status)
+                @Html.CheckBoxFor(m => m.Status)
+                @Html.ValidationMessageFor(m => m.Status)
+            </li>
+            <li class="change-password">
+                <input type="submit" value="Добавить" class="btn btn-default" />
+            </li>
+        </ol>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+   

@@ -1,0 +1,29 @@
+﻿@model NoNameApp.Entities.Serial
+@using (Html.BeginForm("SerialInfo", "Serial", FormMethod.Post))
+            {
+                foreach (var season in Model.Seasons)
+                {
+                <div class="col-md-12 season">
+                    <div class="col-md-2 ">
+                        <h4>@Html.LabelFor(modelSeas => season.NumberOfSeasons) @Html.DisplayFor(modelSeas => season.NumberOfSeasons)</h4>
+                    </div>
+                    <div class="col-md-9 ">
+                        <ul class="episode-list spis">
+                            @foreach (var episode in season.Episodes)
+                            {
+                                <li>
+                                    <input type="checkbox" name="selectedEpisode" value="@episode.Id" checked="@episode.Wacthed" />
+                                    @episode.Date.ToString("dd.MM.yy")
+                                    @Html.LabelFor(modelep => episode.NumberOfEpisode)
+                                    @Html.DisplayFor(modelEp => episode.NumberOfEpisode)
+                                    
+                                    @Html.ActionLink(episode.Name, "WatchingEpisode", new { id = episode.Id })
+                                </li>
+                            }
+                        </ul>
+                        <hr />
+                    </div>
+                </div>
+            }
+    <input type="submit" value="Сохранить изменения" class="btn btn-default" />
+}

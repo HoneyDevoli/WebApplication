@@ -1,0 +1,36 @@
+﻿@model List<NoNameApp.Entities.Episode>
+@using NoNameApp.WEB.Helpers
+@{
+    ViewBag.Title = "Мой календарь";
+}
+<div>
+    @if (Model.Count != 0)
+    {
+        int check = 0;
+        <h2>Скоро тебе смотреть</h2>
+            foreach (var episode in Model)
+            {
+                if (episode.Date.Month != check)
+                {
+                    <h2> @episode.Date.ToString("MMMMMM")</h2>
+                }
+                <p class="comingSoon">
+                    <span class="comingSoon-unit">@episode.Date.ToString("dd, ddd")</span>
+                    <span class="comingSoon-unit">@Html.ActionLink(episode.Season.Serial.Name, "SerialInfo", "Serial", new { id = episode.Season.SerialId }, null)</span>
+                    <span class="comingSoon-unit">
+                        @Html.DisplayFor(ep => episode.NumberOfEpisode) серия
+                        @Html.DisplayFor(name => episode.Name)
+                    </span>
+                    @{check = episode.Date.Month;}
+                    @{int date = Math.Abs(episode.Date.DayOfYear - DateTime.Now.DayOfYear);}
+                    <span class="comingSoon-unit righted">@ListHelpers.PluralizeRus(date, "День", "Дня", "Дней")</span>
+                </p>
+             }
+    }
+    else
+    {
+        <h2>В ближайшее время из твоих сериалов ничего не выйдет, возможно стоит начать
+        смотреть что-то @Html.ActionLink("новое.", "Index", "Serial")</h2>
+    }
+
+</div>

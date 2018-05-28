@@ -1,0 +1,112 @@
+﻿@model List<NoNameApp.Entities.Serial>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Главная";
+}
+<div class=" search">
+    <div class="row search-position">
+        <div class="pre-search col-md-offset-2">
+            <div>
+                <div class="row text-center">
+                    <h2 class="intro-header">Начни отмечать сериалы</h2>
+
+                </div>
+                <div class="row row-search text-center">
+                   @using (Html.BeginForm("Search", "Serial", FormMethod.Get, new { @class = "col-md-offset-1 f-search" }))
+                   {
+                    <input type="text"  class="form-control form-search"  name="search" placeholder="Поиск сериалов" />
+                    <button type="submit" class="btn btn-search btn-default" name="Поиск">Поиск</button>
+                   }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row content intro">
+    
+    <div class="row">
+        <div class="test col-md-3 col-md-offset-2">
+            <div class="media">
+                <div class="media-left">
+                        <img class="media-object img-rounded" src="~/Img/pic_promo2.png" alt="#" height="50" width="50">
+                   
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Узнай</h4>
+                    о дате выхода следующих новых серий
+                </div>
+            </div>
+        </div>
+        <div class="test col-md-3 ">
+            <div class="media">
+                <div class="media-left">
+                        <img class="media-object img-rounded" src="~/Img/pic_promo1.png" alt="#" height="50" width="50">
+                   
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Составь</h4>
+                    свой список сериалов, поставь свою оценку
+                </div>
+            </div>
+        </div>
+        <div class="test col-md-3 ">
+            <div class="media">
+                <div class="media-left">
+                    
+                        <img class="media-object img-rounded" src="~/Img/pic_promo4.png" alt="#" height="50" width="50">
+                    
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Отметь</h4>
+                    просмотренные серии
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+       
+        <div class="test col-md-5 col-md-offset-4">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <button class="btn btn-registration">@Html.ActionLink("Регистрируйся!", "Register", "Account")</button>
+                </div>
+            </div>
+        </div>
+       
+     
+    </div>
+</div>
+<div class="row row-color">
+    <h2 class="text-center">Новые сериалы</h2>
+    <div class="col-md-1 col-md-offset-1"></div>
+    @if (Model.Count > 0)
+    {
+        for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="col-md-3 ">
+                <div class="thumbnail">
+                    <img src="@Model[i].Picture" height="144" alt ="здесь был пик">
+                    <div class="caption">
+                        <h3>@Model[i].Name</h3>
+                        @if (Model[i].Description.Length > 67)
+                        {
+                            <p>@Model[i].Description.Substring(0, 67)...</p>
+                        }
+                        else
+                        {
+                            <p>@Model[i].Description</p>
+                        }
+                        <button class="btn btn-default">@Html.ActionLink("Подробнее", "SerialInfo", "Serial", new { id = Model[i].Id }, "")</button>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3>Сериалов в базе нет</h3>
+    }
+       
+</div>

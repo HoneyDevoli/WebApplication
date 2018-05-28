@@ -1,0 +1,10 @@
+﻿@model NoNameApp.Entities.Serial
+@if (User.IsInRole("admin"))
+{
+    using (Html.BeginForm("AddSeason", "Serial"))
+    {
+        @Html.HiddenFor(s=>s.Id)
+        <input type="hidden" name="count" value="@Model.Seasons.Count()" />
+        <input type="submit" name="submit" value="Добавить сезон" class="btn btn-default" />
+    }
+}

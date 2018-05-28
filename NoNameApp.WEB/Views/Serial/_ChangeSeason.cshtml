@@ -1,0 +1,20 @@
+﻿@model NoNameApp.Entities.Season
+
+
+@using (Html.BeginForm("ChangeNumberSeason", "Serial"))
+{
+    <span style="font-size:16px;margin-top:10px;">@Html.LabelFor(modelSeas => Model.NumberOfSeasons)
+        @Html.EditorFor(s => s.NumberOfSeasons, new { htmlAttributes = new { placeholder = "Новый номер сезона" } })
+       </span>
+    @Html.HiddenFor(s => s.SerialId)
+    <input type="hidden" name="id" value="@Model.Id" /> 
+    <input type="submit" name="submit" value="Изменить"  class="btn btn-default" />
+}
+
+<button class="btn btn-default">
+    @Html.ActionLink("Удалить Cезон", "ConfirmDelSeason",
+                                    new { idSeas = Model.Id, idSer = Model.Serial.Id },
+                                    new { @class = "confirmModal" })
+</button>
+
+

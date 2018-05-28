@@ -1,0 +1,69 @@
+﻿@model NoNameApp.WEB.Models.EditUserViewModel
+@{ViewBag.Title = "Управление учетной записью"; }
+
+<h3>Редактирование данных</h3>
+ @if (ViewBag.StatusMessage != null)
+{
+    <div class="alert alert-info" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        @ViewBag.StatusMessage
+    </div>
+}
+<hr />
+
+@using (Html.BeginForm("Edit", "Account"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Форма изменения пароля</legend>
+        <ol>
+            <li class="change-password">
+                @Html.LabelFor(m => m.OldPassword)
+                @Html.PasswordFor(m => m.OldPassword)
+                @Html.ValidationMessageFor(m => m.OldPassword)
+            </li>
+            <li class="change-password">
+                @Html.LabelFor(m => m.NewPassword)
+                @Html.PasswordFor(m => m.NewPassword)
+                @Html.ValidationMessageFor(m => m.NewPassword)
+            </li>
+            <li class="change-password">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </li>
+            <li class="change-password">
+                <input type="submit" value="Смена пароля" class="btn btn-default" />
+            </li>
+        </ol>
+    </fieldset>
+}
+    <hr />
+   
+    @if (!User.IsInRole("admin"))
+    {
+        <button class="btn btn-default" style="background-color:salmon">@Html.ActionLink("Купить подписку на месяц", "BuyVip", "Account")</button>
+        <h5>Подписка позволяет смотреть сериалы онлайн, стоимость подписки 500р в месяц</h5>
+        <hr />
+    }
+    @if (User.IsInRole("admin"))
+    {
+        <h4>Покупки премиум аккаунтов</h4>
+        <hr/>
+        <table>
+        <tr><th>Емайл</th><th>Дата заказа</th><th>Подтверждение</th></tr> 
+        @foreach(var order in ViewBag.orders)
+        {
+            if (order.Status == false)
+            {
+                <tr><td>@order.Email</td><td>@order.Date</td><td>@Html.ActionLink("Подвердить покупку премиум аккаунта", "ChangeRoleVip", "Account", new { id = order.Id }, null)</td></tr>
+            }
+        }
+        </table>
+        <hr/>
+    }
+
+
+

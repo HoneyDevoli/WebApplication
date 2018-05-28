@@ -1,0 +1,17 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h3>Вы уверены что хотите удалить данный сезон?</h3>
+    </div>
+    <div class="modal-body">
+        <button class="btn btn-default">
+            @Html.ActionLink("Да", "DeleteSeason",
+                                       new { idSeas = ViewBag.IdSeas, idSer = ViewBag.IdSer },
+                                       new { @class = "confirmModal" })
+        </button>
+        <button class="btn btn-default" data-dismiss="modal" area-hidden="true">Нет</button>
+    </div>
+</div>
+
+
+

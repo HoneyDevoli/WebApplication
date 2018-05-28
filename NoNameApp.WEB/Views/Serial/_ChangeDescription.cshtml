@@ -1,0 +1,14 @@
+﻿@model NoNameApp.Entities.Serial
+@if (User.IsInRole("admin"))
+{
+    using (Html.BeginForm("ChangeDescription", "Serial"))
+    {
+        @Html.HiddenFor(s=>s.Id)
+        @Html.TextAreaFor(s => s.Description, new { htmlAttributes = new { placeholder = "Новое описание серии"} })
+        <input type="submit" name="submit" value="Изменить" class="btn btn-default" />
+    }
+}
+else
+{
+    @Html.DisplayFor(s => s.Description)
+}

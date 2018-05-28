@@ -1,0 +1,410 @@
+﻿body {
+    padding-bottom: 20px;
+   
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 125px;
+    padding-right: 55px;
+   
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+
+.menu-user, body, html {
+    height: 100%;
+}
+
+.container {
+    margin-top: -20px;
+    height: 90%;
+}
+a:hover {
+    text-decoration:none;
+}
+/*main layout
+------------------------------------------------------*/
+.menu {
+    border-bottom-color: yellow;
+    border-bottom-width: 4px;
+}
+
+.footer-bottom {
+    height: 80px;
+    background-color: #222;
+}
+.footer-text {
+    padding: 17px 0;
+    color: #aaa;
+}
+.footer-top {
+    height: 18px;
+    background-color: #555;
+}
+
+.bar-left li {
+    text-align: center;
+    height: 6em;
+    border-color: black;
+    background-color: #aaa;
+}
+
+.bar-left li a{
+    font-size: 20px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-decoration: none;
+}
+
+.bar-left li a:hover {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.all {
+    margin-left: 500px;
+    margin-top: -50px;
+}
+/*----RateForm--------------------------------------------------*/
+.btn-rate {
+    margin-left: 0;
+    color: rgba(2, 2, 2, 0.1);
+    background-color: rgba(2, 2, 2, 0.0);
+    border: none;
+    font-size: 35px;
+    cursor:pointer;
+}
+
+.clicked {
+    color: red;
+}
+
+.sizezv {
+    font-size: 25px;
+    cursor:default;
+}
+
+.list-group-item-serial {
+    width: 250px;
+}
+
+.list-group-item-serial:first-child {
+    width: 120px;
+}
+
+.list-group-item-serial:last-child {
+    padding-left: 130px;
+    width: 120px;
+}
+
+.list-group-item tr {
+    background-color: rgba(2, 2, 2, 0.1);
+}
+
+.list-group-item td {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+p.panel-heading {
+    font-size: 21px;
+}
+
+.panel-title .collapse-btn {
+    font-size: 18px;
+}
+
+.comingSoon {
+    border-bottom: 1px solid black;
+}
+
+.comingSoon-unit {
+    margin: 0 20px;
+}
+
+.righted {
+    position:absolute;
+    left:700px;
+}
+
+.info-box-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.info-box {
+    font-size: 21px;
+    height: 125px;
+    background-color: chartreuse;
+    width: 125px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 15px 10px;
+}
+
+.info-box-green {
+    background-color: lawngreen;
+}
+.info-box-red {
+    background-color: indianred;
+}
+.info-box-blue {
+    background-color: royalblue;
+}
+
+.change-password {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 10px;
+}
+
+.change-password:last-child {
+    margin: 10px 10px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: red;
+}
+
+
+.validation-summary-errors {
+    color:red;
+}
+/*** layout*/
+.btn-registration
+{
+    height:75px;
+    width:350px;
+    font-size:24px;
+    background-color:#5fbff7;
+    
+}
+.btn-registration > a {
+        color: white;
+}
+.row-color
+{
+    padding-bottom:10%;
+    background-color:rgba(198, 194, 194, 0.10);
+}
+.row-color img
+{
+    height:146px;
+    width:255px;
+}
+.pre-search {
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding-bottom: 2%;
+    background-color: rgba(2, 2, 2, 0.5);
+}
+.pre-search h2
+{
+    color:white;
+}
+.form-search {
+    display: inline;
+    height: 45px;
+    width: 600px;
+    font-size: 30px;
+}
+.btn-search
+{
+    margin-bottom:1.4%;
+    height:45px;
+    font-size:20px;
+}
+.search {
+    margin-left:-1.3%;
+    position:relative;
+    height: 470px;
+    width: 100%;
+}
+.search-position{
+    position:relative;
+    top:40%;
+}
+.f-search
+{
+ position:relative;
+ right:4.5%;
+}
+
+
+
+.search:after {
+    top: 0;
+    left: 0;
+    content: "";
+    position: absolute;
+    background-image: url(/Img/7db.png);
+    /*http: //i0.kym-cdn.com/photos/images/facebook/001/242/321/7db.png*/
+    height: 700px;
+    width: 102.5%;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    z-index: -1;
+}
+ .brand {
+    font-size: 22px;
+    color:#f8f3f3 !important;
+}
+
+.change-password input[type="text"],
+.change-password input[type="date"],
+.change-password input[type="submit"],
+.change-password input[type="password"],
+.change-password textarea {
+    width: 300px;
+}
+
+.alert-danger{
+    margin-top:5px;
+}
+.alert{
+    margin-bottom:5px;
+}
+
+#pCounty{
+    margin:0;
+}
+
+textarea[htmlattributes="{ placeholder = Новое описание серии }"] {
+    width: 700px;
+    height: 110px;
+}
+input[type="number"]
+{
+    width:44px;
+}
+
+form[action="/Serial/AddEpisode"] {
+    position: relative;
+    left: 100px;
+}
+
+.col-md-12.season {
+    margin-top: 40px;
+}
+
+a[class="confirmModal"] {
+    color:black;
+}
+
+.progress-bar {
+    color: #f1bfbf !important;
+}
+
+.serial {
+    padding-left: 20px;
+    padding-top: -40px;
+    margin-bottom: 10%;
+}
+
+
+/*index
+--------------------------------------------------------*/
+
+.intro {
+    color:white;
+    background-color: rgba(2, 2, 2, 0.7);
+    border-radius: 5px;
+}
+
+.intro-header {
+    margin: 15px auto;
+}
+
+.intro .row {
+    margin: 30px auto;
+}
+
+
+
+/*---------------- sherlock style */
+
+.watch-button>.pagination
+{
+    margin:0;  
+    width:400px;
+}
+
+.watch-button>.pagination>li>a
+{
+    width:160px;
+    height:50px;
+    padding-top:13px;
+    padding-left:30px;
+    font-size:18px;
+    color:black;
+}
+.spis li:nth-child(odd) {
+    background: #e8e1e1;
+    width: 52rem;
+}
+
+.spis li:nth-child(even) {
+    background: #fffafa;
+    width: 52rem;
+}
+
+.spis {
+    margin-top: 10px;
+}
+
+.episode-list {
+    list-style-type: none;
+}
+
+.myError {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 87%;
+    justify-content: center;
+}
+
+/*.caption > p {
+    word-break: break-all;
+}*/
+
+#begin{
+    width:175px;
+}
+
+input[type=checkbox],
+input[type=radio] {
+    height: 10px;
+    width: 10px;
+    -webkit-transform: scale(2,2);
+    -moz-transform: scale(2,2);
+    -o-transform: scale(2,2);
+    transform: scale(2,2);
+    cursor:pointer;
+}
+
+.panel-collapse >.list-group > .list-group-item {
+    border: none;
+    padding-top:3px;
+    padding-bottom:3px;
+}
